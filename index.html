@@ -4,49 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skills Self-Assessment</title>
+    <!-- Add Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <h1>Skills Self-Assessment</h1>
-<div>
-    <h3>Before Learning</h3>
-    <label for="reading-before">Reading Comprehension</label>
-    <input type="number" id="reading-before" min="1" max="5" value="1">
-    <label for="writing-before">Academic Writing</label>
-    <input type="number" id="writing-before" min="1" max="5" value="1">
-    <label for="critical-thinking-before">Critical Thinking</label>
-    <input type="number" id="critical-thinking-before" min="1" max="5" value="1">
-    <label for="research-before">Research Skills</label>
-    <input type="number" id="research-before" min="1" max="5" value="1">
-    <label for="time-before">Time Management</label>
-    <input type="number" id="time-before" min="1" max="5" value="1">
-    <label for="presentation-before">Presentation Skills</label>
-    <input type="number" id="presentation-before" min="1" max="5" value="1">
+<p>Enter your self-assessment ratings for each skill area below (1-5, where 1 = Beginner and 5 = Advanced):</p>
 
-    <h3>After Learning</h3>
-    <label for="reading-after">Reading Comprehension</label>
-    <input type="number" id="reading-after" min="1" max="5" value="3">
-    <label for="writing-after">Academic Writing</label>
-    <input type="number" id="writing-after" min="1" max="5" value="3">
-    <label for="critical-thinking-after">Critical Thinking</label>
-    <input type="number" id="critical-thinking-after" min="1" max="5" value="3">
-    <label for="research-after">Research Skills</label>
-    <input type="number" id="research-after" min="1" max="5" value="3">
-    <label for="time-after">Time Management</label>
-    <input type="number" id="time-after" min="1" max="5" value="4">
-    <label for="presentation-after">Presentation Skills</label>
-    <input type="number" id="presentation-after" min="1" max="5" value="4">
+<h3>Before Learning</h3>
+<form>
+    <label for="reading-before">Reading Comprehension: </label>
+    <input type="number" id="reading-before" min="1" max="5" value="1"><br>
 
-    <button onclick="generateChart()">Generate Radar Chart</button>
-</div>
+    <label for="writing-before">Academic Writing: </label>
+    <input type="number" id="writing-before" min="1" max="5" value="1"><br>
+
+    <label for="critical-thinking-before">Critical Thinking: </label>
+    <input type="number" id="critical-thinking-before" min="1" max="5" value="1"><br>
+
+    <label for="research-before">Research Skills: </label>
+    <input type="number" id="research-before" min="1" max="5" value="1"><br>
+
+    <label for="time-before">Time Management: </label>
+    <input type="number" id="time-before" min="1" max="5" value="1"><br>
+
+    <label for="presentation-before">Presentation Skills: </label>
+    <input type="number" id="presentation-before" min="1" max="5" value="1"><br>
+</form>
+
+<h3>After Learning</h3>
+<form>
+    <label for="reading-after">Reading Comprehension: </label>
+    <input type="number" id="reading-after" min="1" max="5" value="3"><br>
+
+    <label for="writing-after">Academic Writing: </label>
+    <input type="number" id="writing-after" min="1" max="5" value="3"><br>
+
+    <label for="critical-thinking-after">Critical Thinking: </label>
+    <input type="number" id="critical-thinking-after" min="1" max="5" value="3"><br>
+
+    <label for="research-after">Research Skills: </label>
+    <input type="number" id="research-after" min="1" max="5" value="3"><br>
+
+    <label for="time-after">Time Management: </label>
+    <input type="number" id="time-after" min="1" max="5" value="4"><br>
+
+    <label for="presentation-after">Presentation Skills: </label>
+    <input type="number" id="presentation-after" min="1" max="5" value="4"><br>
+</form>
+
+<button onclick="generateChart()">Generate Radar Chart</button>
 
 <h3>Results</h3>
 <canvas id="radarChart" width="400" height="400"></canvas>
 
 <script>
 function generateChart() {
-    // Get ratings from user input
+    // Collect user inputs
     const beforeData = [
         document.getElementById('reading-before').value,
         document.getElementById('writing-before').value,
@@ -68,7 +83,7 @@ function generateChart() {
     // Get the canvas context
     const ctx = document.getElementById('radarChart').getContext('2d');
 
-    // Clear previous chart instance if exists
+    // Destroy any previous chart instance to avoid duplicates
     if (window.myRadarChart) {
         window.myRadarChart.destroy();
     }
@@ -94,7 +109,7 @@ function generateChart() {
             ]
         },
         options: {
-            responsive: false,
+            responsive: true,
             scales: {
                 r: {
                     beginAtZero: true,
