@@ -101,15 +101,80 @@ function generateChart() {
                     borderColor: "rgba(255, 99, 132, 1)"
                 },
                 {
-                    label: "After Learning",
+                    label: "After Learning", 
                     data: afterData,
                     backgroundColor: "rgba(54, 162, 235, 0.2)",
                     borderColor: "rgba(54, 162, 235, 1)"
-                        // Define colors for the radar chart
-    const beforeColor = 'rgba(255, 99, 132, 0.2)';  //color for 'before' dataset (light red)
-    const afterColor = 'rgba(54, 162, 235, 0.2)';   //color for 'after' dataset (light blue)
+                    <script>
+function generateChart() {
+    // Collect user inputs
+    const beforeData = [
+        document.getElementById('reading-before').value,
+        document.getElementById('writing-before').value,
+        document.getElementById('critical-thinking-before').value,
+        document.getElementById('research-before').value,
+        document.getElementById('time-before').value,
+        document.getElementById('presentation-before').value
+    ].map(Number);
+
+    const afterData = [
+        document.getElementById('reading-after').value,
+        document.getElementById('writing-after').value,
+        document.getElementById('critical-thinking-after').value,
+        document.getElementById('research-after').value,
+        document.getElementById('time-after').value,
+        document.getElementById('presentation-after').value
+    ].map(Number);
+
+    // Get the canvas context
+    const ctx = document.getElementById('radarChart').getContext('2d');
+
+    // Destroy any previous chart instance to avoid duplicates
+    if (window.myRadarChart) {
+        window.myRadarChart.destroy();
+    }
+
+    // Define colors for the radar chart
+    const beforeColor = 'rgba(255, 99, 132, 0.2)';  // Example color for 'before' dataset (light red)
+    const afterColor = 'rgba(54, 162, 235, 0.2)';   // Example color for 'after' dataset (light blue)
     const borderBeforeColor = 'rgba(255, 99, 132, 1)';  // Border color for 'before' dataset (red)
     const borderAfterColor = 'rgba(54, 162, 235, 1)';   // Border color for 'after' dataset (blue)
+
+    // Radar chart configuration
+    const config = {
+        type: 'radar',
+        data: {
+            labels: ['Reading', 'Writing', 'Critical Thinking', 'Research', 'Time Management', 'Presentation'],
+            datasets: [{
+                label: 'Before',
+                data: beforeData,
+                backgroundColor: beforeColor,
+                borderColor: borderBeforeColor,
+                borderWidth: 1
+            }, {
+                label: 'After',
+                data: afterData,
+                backgroundColor: afterColor,
+                borderColor: borderAfterColor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scale: {
+                ticks: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // Create the radar chart
+    window.myRadarChart = new Chart(ctx, config);
+}
+</script>
+
+                      
                 }
             ]
         },
